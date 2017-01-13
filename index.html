@@ -1,31 +1,42 @@
-<html>
-<head>
-  <title>Simple Project Timeline Sample</title>
-  <script src="./bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="./bower_components/simple-timeline/simple-timeline.html">
-  <link href='https://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
-  <style>
-    body {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 20px;
-      color: #eee;
-      background-color: #111;
-      font-family: 'Dosis', sans-serif;
-      font-size: 20px;
-      }
-  </style>
-</head>
-<body>
-  <simple-timeline style="width:100%;height: 100%" color="#eee" bgcolor="#252525" breaks="0=Q1/2016;25=Q2;50=Q3;75=Q4 (and we should be ready)">
-    <simple-timeline-item fill color="#d81b60" x="16" y="3">Today</simple-timeline-item>
-    <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
-    <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
-    <simple-timeline-item fill x="30" y="1" dotted>Alpha1 release</simple-timeline-item>
-    <simple-timeline-item x="52" y="1" dotted>Beta1 release</simple-timeline-item>
-    <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
-    <simple-timeline-item color="#d81b60" x="85" y="3">JavaOne</simple-timeline-item>
-  </simple-timeline>
+<base href="https://polygit.org/simple-timeline+samie+master/components/">
+
+<script src="webcomponentsjs/webcomponents-lite.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
+
+<link rel="import" href="iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="simple-timeline/simple-timeline.html">
+
+<style is="custom-style" include="demo-pages-shared-styles">
+  div.centered {
+    max-width: 840px;
+  }
+</style>
+<div class="vertical-section-container centered">
+  <h3>Basic simple-timeline demo</h3>
+  <demo-snippet>
+    <template>
+      <style>
+        simple-timeline {
+          width: 800px;
+          height: 600px;
+          color: #eee;
+          background-color: #111;
+          font-family: 'Dosis', sans-serif;
+          font-size: 10px;
+        }
+      </style>
+
+      <simple-timeline color="#eee" bgcolor="#252525" breaks="0=Q1/2016;25=Q2;50=Q3;75=Q4 (and we should be ready)">
+        <simple-timeline-item fill color="#d81b60" x="16" y="3">Today</simple-timeline-item>
+        <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
+        <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
+        <simple-timeline-item fill x="30" y="1" dotted>Alpha1 release</simple-timeline-item>
+        <simple-timeline-item x="52" y="1" dotted>Beta1 release</simple-timeline-item>
+        <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
+        <simple-timeline-item color="#d81b60" x="85" y="3">Release Date</simple-timeline-item>
+      </simple-timeline>
+    </template>
+  </demo-snippet>
 </div>
-</body>
-</html>
