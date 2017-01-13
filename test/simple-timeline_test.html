@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>simple-timeline test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../simple-timeline.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <simple-timeline style="width:100%;height: 100%" color="#eee" bgcolor="#252525" breaks="0=Q1/2016;25=Q2;50=Q3;75=Q4 (and we should be ready)">
+          <simple-timeline-item fill color="#d81b60" x="16" y="3">Today</simple-timeline-item>
+          <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
+          <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
+          <simple-timeline-item fill x="30" y="1" dotted>Alpha1 release</simple-timeline-item>
+          <simple-timeline-item x="52" y="1" dotted>Beta1 release</simple-timeline-item>
+          <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
+          <simple-timeline-item color="#d81b60" x="85" y="3">JavaOne</simple-timeline-item>
+      </simple-timeline>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('simple-timeline', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'simple-timeline');
+        });
+      });
+    </script>
+  </body>
+</html>

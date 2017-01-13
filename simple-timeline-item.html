@@ -1,0 +1,124 @@
+<link rel="import" href="../polymer/polymer.html">
+<dom-module id="simple-timeline-item">
+    <template>
+    <style>
+
+      :host {
+        display: block;
+        position:absolute;
+        height: 30%;
+        width:9%;
+        top: 20%;
+        border-left: 1px solid #000;
+      }
+
+      #point {
+        position: absolute;
+        border: 1px solid #a0a0a0;
+        width: 26px;
+        height: 26px;
+        left: -15px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        top: 100%;
+        margin-top: -14px;
+        transition: all .2s ease-in-out;
+      }
+
+      #point:hover  {
+        transform: scale(1.3);
+      }
+
+      #content {
+        position: absolute;
+        width:100%;
+        top: -26px;
+        left: -6px;
+      }
+
+      /* Upside down */
+
+      #point.down {
+        top: 0;
+      }
+
+      #content.down {
+        top: 100%;
+      }
+
+    </style>
+    <div id="point" style="background-color: [[bgcolor]]; border-color: [[color]];"></div>
+    <div id="content"><content></content><div>
+  </template>
+
+    <script>
+        Polymer({
+            is: 'simple-timeline-item',
+            properties: {
+                x: {
+                    type: Number,
+                    notify: true
+                },
+                y: {
+                    type: Number,
+                    notify: true
+                },
+                dotted: {
+                    value: false,
+                    type: Boolean,
+                    notify: true
+                },
+                fill: {
+                    value: false,
+                    type: Boolean,
+                    notify: true
+                },
+                color: {
+                    value: "",
+                    type: String,
+                    notify: true
+                },
+            },
+            ready: function() {
+
+
+
+                this.style.left = this.x + "%";
+                var t = 10 * (5 - this.y);
+                if (this.y > 0) {
+                    this.style.top = t + "%";
+                    this.style.height = (50 - t) + "%";
+                    this.$.point.classList.remove("down");
+                    this.$.content.classList.remove("down");
+                } else {
+                    this.style.top = "50%";
+                    this.style.height = (t - 50) + "%";
+                    this.$.point.classList.add("down");
+                    this.$.content.classList.add("down");
+                }
+
+                if (this.dotted) {
+                    this.style.borderLeftStyle = "dashed";
+                    this.$.point.style.borderStyle = "dashed";
+                } else {
+                    this.style.borderLeftStyle = "solid";
+                    this.$.point.style.borderStyle = "solid";
+                }
+
+                // Use line color by default
+                if (this.color == "") {
+                    this.color = this.parentNode.$.line.style.backgroundColor;
+                }
+
+                // Default fill with parent backgroundColor
+                this.$.point.style.backgroundColor = this.parentNode.bgcolor;
+
+                this.$.point.style.borderColor = this.color;
+                this.style.borderColor = this.color;
+                if (this.fill) {
+                    this.$.point.style.backgroundColor = this.color;
+                }
+            }
+        });
+    </script>
+</dom-module>

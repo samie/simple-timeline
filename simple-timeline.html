@@ -1,0 +1,84 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./simple-timeline-item.html">
+<dom-module id="simple-timeline">
+    <template>
+    <style>
+      :host {
+        position:relative;
+        display: block;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      #line {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        width: calc(100% - 10px);
+        height: 3px;
+        border: none;
+        margin-top: -2px;
+      }
+
+      div.break {
+          position: absolute;
+          background-color: #ffffff;
+          height: 3px;
+          width: 1%;
+          line-height: 68px;
+          text-indent: 10px;
+          opacity: 1;
+          white-space: nowrap;
+          overflow-x: visible;
+      }
+    </style>
+    <div id="line" style="background-color: [[color]];"></div>
+    <content></content>
+  </template>
+    <script>
+        Polymer({
+            is: 'simple-timeline',
+            properties: {
+                color: {
+                    value: "#a0a0a0",
+                    type: String,
+                    notify: true
+                },
+                bgcolor: {
+                    value: "#fff",
+                    type: String,
+                    notify: true
+                },
+                breaks: {
+                    value: "",
+                    type: String,
+                    notify: true
+                }
+            },
+            ready: function() {
+              
+                // Apply colors
+                this.style.backgroundColor = this.bgcolor;
+                this.style.color = this.color;
+
+                // Create breaks
+                var brs = this.breaks.split(";");
+                for (i = 0; i < brs.length; i++) {
+                    var b = brs[i];
+                    var t = "";
+                    if (b.indexOf("=") > 0) {
+                        var bt = b.split("=");
+                        b = bt[0];
+                        t = bt[1];
+                    }
+                    var node = document.createElement('div');
+                    node.innerHTML = t;
+                    node.className = "break";
+                    node.style.left = b + "%";
+                    node.style.backgroundColor = this.bgcolor;
+                    Polymer.dom(this.$.line).appendChild(node);
+                }
+            }
+        });
+    </script>
+</dom-module>
