@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>samie/simple-timeline</title>
+    <base href="https://polygit.org/polymer+^1.0.0/simple-timeline+samie+:master/components/">
+    <script src="webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="simple-timeline/simple-timeline.html">
+
+    <link href='https://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      div.centered {
+        max-width: 840px;
+      }
+      div.vertical-section-container > p.right {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic simple-timeline demo</h3>
+      <p class="right"><small><a class="github" href="https://github.com/samie/simple-timeline">github.com/samie/simple-timeline</a></small></p>
+      <demo-snippet>
+        <template>
+          <!-- Styles for the timeline -->
+          <style>
+            simple-timeline {
+              width: 800px;
+              height: 600px;
+              color: #eee;
+              background-color: #111;
+              font-family: 'Dosis', sans-serif;
+              font-size: 10px;
+            }
+          </style>
+          <!--
+                Timeline specification. Break markers/titles are percentage. For
+                items X is percentage and Y is positive/negative index. Fill and
+                color attributes supported. Order of items implies z-index.
+           -->
+          <simple-timeline color="#eee" bgcolor="#252525" breaks="0=Q1/2017;25=Q2;50=Q3;75=Q4 (and we should be ready)">
+            <simple-timeline-item fill color="#d81b60" x="57" y="3">Today</simple-timeline-item>
+            <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
+            <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
+            <simple-timeline-item fill x="30" y="1" dotted>Alpha1 release</simple-timeline-item>
+            <simple-timeline-item x="52" y="1" dotted>Beta1 release</simple-timeline-item>
+            <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
+            <simple-timeline-item color="#d81b60" x="85" y="3">Release Date</simple-timeline-item>
+          </simple-timeline>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
