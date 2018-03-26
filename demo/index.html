@@ -7,6 +7,13 @@
     <title>simple-timeline demo</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script>
+      /*
+      window.Polymer = window.Polymer || {};
+      window.Polymer.dom = 'shadow';
+      */
+    </script> 
+    <link rel="import" href="../../polymer/polymer.html">
 
     <link href='https://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
 
@@ -27,23 +34,46 @@
         <template>
           <style>
             simple-timeline {
-              width: 800px;
-              height: 600px;
-              color: #eee;
-              background-color: #111;
+              width: 100%;
+              height: 600px;              
+              background-color: #eee; 
+              color: #a0a0a0; 
               font-family: 'Dosis', sans-serif;
-              font-size: 10px;
+              /* --timeline-color: #eee; */
+              /* --timeline-background-color: #000; */
             }
+
+            simple-timeline-item {
+              color: #1d1719; 
+            }
+
+            simple-timeline-item.today {
+              --timeline-item-line-color: #d81b60;
+              --timeline-item-line-style: solid;
+              --timeline-item-text-color: #d81b60;
+              --timeline-item-fill-color: #d81b60; 
+            }
+
+            simple-timeline-item.release {
+              --timeline-item-line-style: dotted;
+            }
+
+            simple-timeline-item.final-release {
+              color: #d81b60;
+              --timeline-item-line-style: dotted;
+              
+            }
+
           </style>
           
-          <simple-timeline color="#eee" bgcolor="#252525" breaks="0=Q1/2016;25=Q2;50=Q3;75=Q4 (and we should be ready)">
-              <simple-timeline-item fill color="#d81b60" x="16" y="3">Today</simple-timeline-item>
+          <simple-timeline breaks="0=Q1/2018;25=Q2;50=Q3;75=Q4 (and we should be ready)">
+              <simple-timeline-item class="today" x="16" y="3">Today</simple-timeline-item>
               <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
               <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
-              <simple-timeline-item fill x="30" y="1" dotted>Alpha1 release</simple-timeline-item>
-              <simple-timeline-item x="52" y="1" dotted>Beta1 release</simple-timeline-item>
+              <simple-timeline-item class="release" x="30" y="1">Alpha1 release</simple-timeline-item>
+              <simple-timeline-item class="release" x="52" y="1">Beta1 release</simple-timeline-item>
               <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
-              <simple-timeline-item color="#d81b60" x="85" y="3">Release Date</simple-timeline-item>
+              <simple-timeline-item class="final-release" x="85" y="3">Release Date</simple-timeline-item>
           </simple-timeline>
         </template>
       </demo-snippet>
