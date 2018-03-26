@@ -92,8 +92,26 @@
                };
             }
 
+            _onClick(e) {
+                var idx = Array.prototype.indexOf.call(this.parentNode.children, this);
+                var textContent = this.innerText ||this.textContent;
+                this.dispatchEvent(new CustomEvent('simple-timeline-item-click', {
+                    bubbles: true, 
+                    composed: true,
+                    detail: {
+                        itemId: this.id, 
+                        index: idx, 
+                        text: textContent
+                        }
+                    })
+                );
+            }
+
             ready() {
                 super.ready();
+
+                // Register event listener
+                this.$.point.addEventListener('click', this._onClick.bind(this));
 
                 this.style.left = this.x + "%";
                 var t = 10 * (5 - this.y);

@@ -24,7 +24,6 @@
 
       div.break {
           position: absolute;
-          background-color: var(--timeline-background-color, var(--timeline-default-background-color));
           width: var(--timeline-width, calc(0.2em * 2));;
           line-height: calc(2em * 2);
           text-indent: calc(0.2em * 2);
@@ -57,9 +56,9 @@
             }
 
             /**
-            * `_allItem()` returns all the tabs in the tab panel.
+            * `_allItem()` returns all the 'simple-timeline-item's in the 'simple-timeline'.
             */
-            _allItem() {
+            _allItems() {
                 return Array.from(this.querySelectorAll('simple-timeline-item'));
             }
 
