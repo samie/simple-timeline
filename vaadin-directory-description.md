@@ -1,6 +1,6 @@
 # Simple timeline widget for Polymer
 
-[![Available in Vaadin_Directory](https://img.shields.io/vaadin-directory/v/vaadinvaadin-grid.svg)](https://vaadin.com/directory/components/samiesimple-timeline)
+[![Available in Vaadin_Directory](https://img.shields.io/vaadin-directory/v/samiesimple-timeline.svg)](https://vaadin.com/directory/component/samiesimple-timeline)
 
 With simple-timeline you can present a horizontal timeline of events. The event are relative left is 0 and right is 100 and vertically the titles can be set on different levels (-3 to 3). A custom item click listener can be added to make the timeline diagram interactive.
 
