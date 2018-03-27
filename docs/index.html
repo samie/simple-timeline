@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>samie/simple-timeline</title>
-    <base href="https://polygit.org/polymer+^1.0.0/simple-timeline+samie+:master/components/">
+    <base href="https://polygit.org/polymer+^2.0.0/simple-timeline+samie+:polymer2/components/">
     <script src="webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="iron-demo-helpers/demo-snippet.html">
@@ -11,7 +11,8 @@
 
     <style is="custom-style" include="demo-pages-shared-styles">
       div.centered {
-        max-width: 840px;
+        max-width: 800px;
+        margin: 0 auto;
       }
       div.vertical-section-container > p.right {
         text-align: right;
@@ -24,31 +25,58 @@
       <p class="right"><small><a class="github" href="https://github.com/samie/simple-timeline">github.com/samie/simple-timeline</a></small></p>
       <demo-snippet>
         <template>
-          <!-- Styles for the timeline -->
           <style>
             simple-timeline {
-              width: 800px;
-              height: 600px;
-              color: #eee;
-              background-color: #111;
+              width: 100%;
+              height: 600px;              
+              background-color: #252525; 
+              color: #eee; 
               font-family: 'Dosis', sans-serif;
-              font-size: 10px;
+            }
+
+            /** Default color for all items */
+            simple-timeline-item {
+              color: #eee; 
+            }
+
+            /* Custom styling for "today" */
+            simple-timeline-item#today {
+              --timeline-item-line-color: #d81b60;
+              --timeline-item-text-color: #d81b60;
+              --timeline-item-fill-color: #d81b60; 
+            }
+            
+            /* Custom styling for all "release" */
+            simple-timeline-item.release {
+              --timeline-item-line-style: dotted;
+            }
+
+            /* Custom styling for "final-release" */
+            simple-timeline-item#final-release {
+              color: #d81b60;              
             }
           </style>
-          <!--
-                Timeline specification. Break markers/titles are percentage. For
-                items X is percentage and Y is positive/negative index. Fill and
-                color attributes supported. Order of items implies z-index.
-           -->
-          <simple-timeline color="#eee" bgcolor="#252525" breaks="0=Q1/2017;25=Q2;50=Q3;75=Q4 (and we should be ready)">
-            <simple-timeline-item fill color="#d81b60" x="57" y="3">Today</simple-timeline-item>
-            <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
-            <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
-            <simple-timeline-item fill x="30" y="1" dotted>Alpha1 release</simple-timeline-item>
-            <simple-timeline-item x="52" y="1" dotted>Beta1 release</simple-timeline-item>
-            <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
-            <simple-timeline-item color="#d81b60" x="85" y="3">Release Date</simple-timeline-item>
+          
+          <!-- Configure timeline items horizontally with percentages.  -->
+          <!-- Configure timeline item titles vertically with levels from -3 to 3.  -->
+          <!-- Multiple timeline splits and captions can be configured in 'breaks' attribute. -->
+          <simple-timeline id="mytimeline" breaks="0=Q1/2018;25=Q2;50=Q3;75=Q4 (and we should be ready)">
+              <simple-timeline-item id="today" x="16" y="3">Today</simple-timeline-item>
+              <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
+              <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
+              <simple-timeline-item class="release" x="30" y="1">Alpha1 release</simple-timeline-item>
+              <simple-timeline-item class="release" x="52" y="1">Beta1 release</simple-timeline-item>
+              <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
+              <simple-timeline-item id="final-release" x="85" y="3">Release Date</simple-timeline-item>
           </simple-timeline>
+
+          <script>
+              /** Listen to item click events. */             
+              document.getElementById("mytimeline")
+                .addEventListener('simple-timeline-item-click', 
+                    e => alert("id="+e.detail.itemId+", index="+e.detail.index+", text="+e.detail.text));
+          </script>
+        
         </template>
       </demo-snippet>
     </div>

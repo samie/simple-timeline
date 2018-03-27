@@ -1,69 +1,73 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="./simple-timeline-item.html">
 <dom-module id="simple-timeline">
     <template>
     <style>
+       /* shadow DOM styles go here */
       :host {
         position:relative;
         display: block;
         overflow: hidden;
         box-sizing: border-box;
+        color: var(--timeline-color, #000);
       }
 
-      #line {
+      .timeline {
         position: absolute;
         top: 50%;
         left: 5px;
         width: calc(100% - 10px);
-        height: 3px;
+        height: var(--timeline-width, 0.2em);
         border: none;
-        margin-top: -2px;
-      }
+        margin-top: calc(0.2em / -2);
+    }
 
       div.break {
           position: absolute;
-          background-color: #ffffff;
-          height: 3px;
-          width: 1%;
-          line-height: 68px;
-          text-indent: 10px;
+          width: var(--timeline-width, calc(0.2em * 2));;
+          line-height: calc(2em * 2);
+          text-indent: calc(0.2em * 2);
           opacity: 1;
           white-space: nowrap;
           overflow-x: visible;
       }
     </style>
-    <div id="line" style="background-color: [[color]];"></div>
-    <content></content>
+
+    <!-- shadow DOM goes here -->
+    <div id="timeline" class="timeline"></div>
+    <slot></slot>
   </template>
     <script>
-        Polymer({
-            is: 'simple-timeline',
-            properties: {
-                color: {
-                    value: "#a0a0a0",
-                    type: String,
-                    notify: true
-                },
-                bgcolor: {
-                    value: "#fff",
-                    type: String,
-                    notify: true
-                },
-                breaks: {
-                    value: "",
-                    type: String,
-                    notify: true
+        class SimpleTimeline extends Polymer.Element {        
+            static get is() { 
+                return 'simple-timeline'; 
+            }
+            constructor() {
+                 super();
+            }
+            static get properties() {
+              return {
+                    breaks: {
+                        value: "",
+                        type: String,
+                        notify: true
+                    }
                 }
-            },
-            ready: function() {
-              
-                // Apply colors
-                this.style.backgroundColor = this.bgcolor;
-                this.style.color = this.color;
+            }
+
+            /**
+            * `_allItem()` returns all the 'simple-timeline-item's in the 'simple-timeline'.
+            */
+            _allItems() {
+                return Array.from(this.querySelectorAll('simple-timeline-item'));
+            }
+
+            ready() {
+                super.ready();
 
                 // Create breaks
                 var brs = this.breaks.split(";");
-                for (i = 0; i < brs.length; i++) {
+                for (var i = 0; i < brs.length; i++) {
                     var b = brs[i];
                     var t = "";
                     if (b.indexOf("=") > 0) {
@@ -75,10 +79,14 @@
                     node.innerHTML = t;
                     node.className = "break";
                     node.style.left = b + "%";
-                    node.style.backgroundColor = this.bgcolor;
-                    Polymer.dom(this.$.line).appendChild(node);
+                    node.style.height = getComputedStyle(this.$.timeline).height;
+                    node.style.backgroundColor = getComputedStyle(this).backgroundColor;
+                    Polymer.dom(this.$.timeline).appendChild(node);
                 }
+                this.$.timeline.style.backgroundColor = getComputedStyle(this).color;
+
             }
-        });
+        }
+        customElements.define(SimpleTimeline.is, SimpleTimeline);
     </script>
 </dom-module>
