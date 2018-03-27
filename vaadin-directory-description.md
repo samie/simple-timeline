@@ -1,4 +1,4 @@
-# Simple timeline component for Polymer 1
+# Simple timeline widget for Polymer
 
 [![Available in Vaadin_Directory](https://img.shields.io/vaadin-directory/v/vaadinvaadin-grid.svg)](https://vaadin.com/directory/components/samiesimple-timeline)
 
