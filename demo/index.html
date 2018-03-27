@@ -14,67 +14,70 @@
       */
     </script> 
     <link rel="import" href="../../polymer/polymer.html">
-
     <link href='https://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
-
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../simple-timeline.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
-        div.centered {
-          max-width: 840px;
-        }
+      div.centered {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      div.vertical-section-container > p.right {
+        text-align: right;
+      }
     </style>
   </head>
   <body>
     <div class="vertical-section-container centered">
       <h3>Basic simple-timeline demo</h3>
+      <p class="right"><small><a class="github" href="https://github.com/samie/simple-timeline">github.com/samie/simple-timeline</a></small></p>
       <demo-snippet>
         <template>
           <style>
             simple-timeline {
               width: 100%;
               height: 600px;              
-              background-color: #eee; 
-              color: #a0a0a0; 
+              background-color: #252525; 
+              color: #eee; 
               font-family: 'Dosis', sans-serif;
             }
 
             /** Default color for all items */
             simple-timeline-item {
-              color: #1d1719; 
+              color: #eee; 
             }
 
             /* Custom styling for "today" */
-            simple-timeline-item.today {
+            simple-timeline-item#today {
               --timeline-item-line-color: #d81b60;
-              --timeline-item-line-style: solid;
               --timeline-item-text-color: #d81b60;
               --timeline-item-fill-color: #d81b60; 
             }
             
+            /* Custom styling for all "release" */
             simple-timeline-item.release {
               --timeline-item-line-style: dotted;
             }
 
-            simple-timeline-item.final-release {
-              color: #d81b60;
-              --timeline-item-line-style: dotted;
-              
+            /* Custom styling for "final-release" */
+            simple-timeline-item#final-release {
+              color: #d81b60;              
             }
           </style>
           
-          <!-- Configure timeline items with percentages. -->
+          <!-- Configure timeline items horizontally with percentages.  -->
+          <!-- Configure timeline item titles vertically with levels from -3 to 3.  -->
           <!-- Multiple timeline splits and captions can be configured in 'breaks' attribute. -->
           <simple-timeline id="mytimeline" breaks="0=Q1/2018;25=Q2;50=Q3;75=Q4 (and we should be ready)">
-              <simple-timeline-item id="today" class="today" x="16" y="3">Today</simple-timeline-item>
+              <simple-timeline-item id="today" x="16" y="3">Today</simple-timeline-item>
               <simple-timeline-item x="10" y="-1">Project start</simple-timeline-item>
               <simple-timeline-item x="20" y="-2">Prototypes ready. Start collecting feedback.</simple-timeline-item>
               <simple-timeline-item class="release" x="30" y="1">Alpha1 release</simple-timeline-item>
               <simple-timeline-item class="release" x="52" y="1">Beta1 release</simple-timeline-item>
               <simple-timeline-item x="75" y="2">RC release</simple-timeline-item>
-              <simple-timeline-item class="final-release" x="85" y="3">Release Date</simple-timeline-item>
+              <simple-timeline-item id="final-release" x="85" y="3">Release Date</simple-timeline-item>
           </simple-timeline>
 
           <script>
@@ -86,7 +89,6 @@
         
         </template>
       </demo-snippet>
-
     </div>
   </body>
 </html>
